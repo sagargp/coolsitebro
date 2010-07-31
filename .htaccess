@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^([^/\.]+)/?$ /~sagar/coolsitebro.com/shortener/index.php?code=$1 [L]
