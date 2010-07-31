@@ -57,8 +57,6 @@ div.title {
 	}
 	
 div.input_container {
-	margin: auto;
-	width: 515px;
 	height: 120px;
 }
 	div.input_container input[type=text]{
@@ -76,14 +74,19 @@ div.input_container {
 	}
 	div.input_container div.button.shorten {
 		float: left;
+		width: 65px;
 	}
 	
 	div.input_container div.results_container {
 		clear:both;
-		width:100%;
+		margin: auto;
+		text-align: center;
+		padding-top: 40px;
+		font-size: 18px;
 	}
 	div.input_container div.shortener_container {
-
+		padding-left: 255px;
+		width: 769px;
 	}
 	
 div.footer {
@@ -94,7 +97,7 @@ div.footer {
 	font-size: 1.2em;
 	color: #A4BCC2;
 	font-family: "Helvetica";
-    margin-left: -130px;
+    margin-left: -129px;
 }
 
 div.footer a {

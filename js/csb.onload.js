@@ -5,6 +5,14 @@ $(document).ready(function(){
 	})
 	$("#url").focus();
 	$(window).konami(function(){
-		alert("sup");
-	})
+		alert("i am the eggman");
+	});
+	$(".scrollable").scrollable();
+	var instance = $(".scrollable").data("scrollable");
+	// bind menus
+	$("#about").click(function(){instance.seekTo(1)})
+	$("#api").click(function(){instance.seekTo(2)})
+	$("#contact").click(function(){instance.seekTo(3)})
+	$("#stats").click(function(){instance.seekTo(4)})
+
 })
