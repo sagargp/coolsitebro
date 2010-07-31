@@ -1,3 +1,10 @@
 $(document).ready(function(){
-	
+	$(window).mousemove(function(){
+		$("div.footer").fadeIn("slow");
+		$(this).unbind();
+	})
+	$("#url").focus();
+	$(window).konami(function(){
+		alert("sup");
+	})
 })
