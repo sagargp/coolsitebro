@@ -1,0 +1,65 @@
+*:focus {outline: none;} /* disable highlighting of input fields in chrome*/
+::selection { background: transparent; }
+::-moz-selection { background: transparent; }
+
+body {
+	padding-top: 120px;
+	background-color: #E8F3F8;
+/*	background: url(../img/bg.ice-cubes.png) repeat;*/
+}
+
+div.title {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 6em;
+	color: #A4BCC2;
+	margin: auto;
+	text-align: center;
+}
+.button {
+	border-top: 1px solid #96d1f8;
+	background: #65a9d7;
+	background: -webkit-gradient(linear, left top, left bottom, from(#81A8B8), to(#A4BCC2));
+	background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+	padding: 12px 24px;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius: 6px;
+	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	box-shadow: rgba(0,0,0,1) 0 2px 0;
+	text-shadow: rgba(0,0,0,.2) 0 2px 0;
+	color: white;
+	font-size: 18px;
+	font-family: Georgia, Serif;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+}
+	.button:hover {
+		color: #111;
+	}
+	.button:active {
+		background: -webkit-gradient(linear, left top, left bottom, from(#E8F3F8), to(#A4BCC2));
+	}
+	
+div.input_container {
+	margin: auto;
+	width: 515px;
+	height: 120px;
+}
+	div.input_container input[type=text]{
+		-moz-border-radius: 5px;
+		background-color: #C2CBCE;
+		color: #555;
+		-webkit-border-top-left-radius: 10px;
+		-webkit-border-bottom-left-radius: 10px;
+		padding: 12px 24px;
+		font-size: 18px;
+		float: left;
+		margin-top: 0px;
+		border: 1px solid #81A8B8;
+		width: 350px;
+	}
+	div.input_container div.button.shorten {
+		float: left;
+	}
