@@ -11,17 +11,32 @@ if (in_array($_REQUEST['func'], $functions))
 function new_url() {
 	global $config;
 
+	$ret = array('status' => 'fail');
+
 	$dbh = new PDO('dblib:host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
 		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
 
 	$url = $_REQUEST['url'];
-	$private = $_REQUEST['private'];
+	$private = $_REQUEST['private'] || false;
 	
-	$attributes = array('private'=>$_REQUEST['private'], 'count'=>0);
-	
-	$sth = $dbh->prepare("insert into redirects (url, attributes) values (?, ?)");
-	$sth->execute(array($url, $attributes));
+	$sth = $dbh->prepare("insert into redirects (url, private) values (?, ?)");
 
+	if ( !$sth ) {
+		$err = $dbh->errorInfo();
+		$ret['reason'] = $err[2]; // $err is an array full of 2 useless items followed by descriptive text
+	}
+
+	else if ( !$sth->execute(array($url, $attributes)) ) {
+		$err = $sth->errorInfo();
+		$ret['reason'] = $err[2];
+	}
+	
+	else {
+		$ret['status'] = 'success';
+		$ret['data'] = alphaID($dbh->lastInsertId());
+	}
+
+	echo json_encode($ret);
 }
 
 function fetch_url() {
