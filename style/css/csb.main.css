@@ -99,6 +99,7 @@ div.input_container {
 		div.input_container div.results_container div.results {
 			clear: both;
 			margin-top: 20px;
+			display: none;
 			font-size: 26px;
 			width: 340px;
 			text-align: center;
