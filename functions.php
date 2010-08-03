@@ -19,6 +19,8 @@ function shorten() {
 	$url = $_REQUEST['url'];
 	$private = $_REQUEST['private'] || false;
 	
+	if ( !(strpos($url, "http://") === 0) || !(strpos($url, "https://") === 0) ) $url = "http://" . $url;
+	
 	$sth = $dbh->prepare("insert into redirects (url, private) values (?, ?)");
 
 	if ( !$sth ) {
@@ -69,7 +71,7 @@ function fetch() {
 	if ( $ret['status'] == 'fail')
 		echo json_encode($ret);
 	else
-		header("Redirect: " . $url);
+		header("Location: " . $url);
 
 }
 ?>
