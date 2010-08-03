@@ -1,11 +1,10 @@
 $(document).ready(function(){
+	
+	// show bottom bar on mouseMove
 	$(window).mousemove(function(){
 		$("div.footer").fadeIn("slow");
 		$(this).unbind();
 	})
-	
-	// focus url bar on load
-	$("#url").focus();
 	
 	// konami code leetness
 	$(window).konami(function(){
@@ -16,12 +15,13 @@ $(document).ready(function(){
 	$(".scrollable").scrollable();
 	var instance = $(".scrollable").data("scrollable");
 	
-	// bind menus
+	// bind menus below
 	$("#about").click(function(){instance.seekTo(1)})
 	$("#api").click(function(){instance.seekTo(2)})
 	$("#contact").click(function(){instance.seekTo(3)})
 	$("#stats").click(function(){instance.seekTo(4)})
 
+	// shortenController init (handles ajax/dom of link shortening)
 	shortenController.init(); 
 	
 })

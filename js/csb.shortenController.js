@@ -1,6 +1,17 @@
 var shortenController = {
 	init : function(){
+		var text_pretext = "enter url to minify..."
 		$("div.button.shorten").click(shortenController.shortenURL);
+		$("input#url").val(text_pretext).focus(function(){
+			if($("input#url").val() == text_pretext)
+				$(this).val("");
+		}).blur(function(){
+			if($(this).val() == "")
+				$(this).val(text_pretext)
+			
+		})
+
+		// $("#url").focus();
 	},
 	showLoader : function(){
 		$("div.results_container div.loading").show();
