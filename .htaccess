@@ -12,4 +12,5 @@ Require valid-user
 
 # enable mod_rewrite
 RewriteEngine on
-RewriteRule ^([^/\.]+)/?$ /functions.php?code=$1 [L]
+RewriteRule ^([^/\.]+)/?$ /functions.php?func=fetch&code=$1 [L]
+

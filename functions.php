@@ -3,17 +3,17 @@
 include_once('alphaID.php');
 $config = parse_ini_file('config.ini', true);
 
-$functions = array('new_url', 'fetch_url');
+$functions = array('shorten', 'fetch');
 
 if (in_array($_REQUEST['func'], $functions))
 	$_REQUEST['func']();
 
-function new_url() {
+function shorten() {
 	global $config;
 
 	$ret = array('status' => 'fail');
 
-	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
+	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=' . $config['coolsitebro']['dbname'],
 		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
 
 	$url = $_REQUEST['url'];
@@ -39,13 +39,37 @@ function new_url() {
 	echo json_encode($ret);
 }
 
-function fetch_url() {
+function fetch() {
 	global $config;
 	
 	$ret = array('status' => 'fail');
-	
-	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
-		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
-}
 
+	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=' . $config['coolsitebro']['dbname'],
+		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
+	
+	$code = alphaID($_REQUEST['code'], true);
+	
+	$sth = $dbh->prepare("select url from redirects where id=?");
+	
+	if ( !$sth ) {
+		$err = $dbh->errorInfo();
+		$ret['reason'] = $err[2]; // $err is an array full of 2 useless items followed by descriptive text
+	}
+
+	else if ( !$sth->execute(array($code)) ) {
+		$err = $sth->errorInfo();
+		$ret['reason'] = $err[2];
+	}
+
+	else {
+		$ret['status'] = 'success';
+		$url = $sth->fetchColumn();
+	}
+	
+	if ( $ret['status'] == 'fail')
+		echo json_encode($ret);
+	else
+		header("Redirect: " . $url);
+
+}
 ?>
