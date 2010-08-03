@@ -13,7 +13,7 @@ function new_url() {
 
 	$ret = array('status' => 'fail');
 
-	$dbh = new PDO('dblib:host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
+	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
 		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
 
 	$url = $_REQUEST['url'];
@@ -26,7 +26,7 @@ function new_url() {
 		$ret['reason'] = $err[2]; // $err is an array full of 2 useless items followed by descriptive text
 	}
 
-	else if ( !$sth->execute(array($url, $attributes)) ) {
+	else if ( !$sth->execute(array($url, $private)) ) {
 		$err = $sth->errorInfo();
 		$ret['reason'] = $err[2];
 	}
@@ -40,6 +40,12 @@ function new_url() {
 }
 
 function fetch_url() {
+	global $config;
+	
+	$ret = array('status' => 'fail');
+	
+	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=coolsitebro',
+		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
 }
 
 ?>

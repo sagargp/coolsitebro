@@ -1,2 +1,15 @@
-RewriteEngine off
-RewriteRule ^([^/\.]+)/?$ /~sagar/coolsitebro.com/shortener/index.php?code=$1 [L]
+# temporary auth to lock out non-testers
+AuthUserFile /home/content/r/e/n/renatountalan/htconfig/.htpasswd
+AuthType Basic
+AuthName "Cool site, bro"
+Require valid-user
+
+# deny anyone access to config.ini which contains passw0rds!
+<Files "config.ini">
+	Order Deny,Allow
+	Deny from all
+</Files>
+
+# enable mod_rewrite
+RewriteEngine on
+RewriteRule ^([^/\.]+)/?$ /functions.php?code=$1 [L]
