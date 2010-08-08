@@ -8,6 +8,19 @@ $functions = array('shorten', 'fetch');
 if (in_array($_REQUEST['func'], $functions))
 	$_REQUEST['func']();
 
+function increment(){ // runtalan: incomplete and probably moving to the fetch function...
+	global $config;
+	
+	$ret = array('status' => 'fail');
+
+	$dbh = new PDO($config['coolsitebro']['driver'] . ':host=' . $config['coolsitebro']['host'] . ';dbname=' . $config['coolsitebro']['dbname'],
+		$config['coolsitebro']['username'], $config['coolsitebro']['password']);
+	
+	$code = alphaID($_REQUEST['code'], true);
+	
+	$sth = $dbh->prepare("UPDATE redirects SET visit=visit+1 WHERE id=?");
+}
+
 function shorten() {
 	global $config;
 
